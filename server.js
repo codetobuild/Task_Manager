@@ -55,6 +55,19 @@ app.use((req, res, next) => {
 app.use("/api", require("./routes/index"));
 
 app.use(errorHandler);
+// development
+if (process.env.NODE_ENV == "production") {
+  app.use(express.static(path.join(__dirname, "/client/build")));
+  app.get("*", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  });
+}
 
 // server startup
 startServer(app);
+
+// handle unhandled error close process
+process.on("unhandledRejection", (err, promise) => {
+  console.log(`Erro: ${err}`);
+  server.close(() => process.exit(1));
+});

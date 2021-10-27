@@ -61,7 +61,7 @@ if (process.env.NODE_ENV == "production") {
   app.get("*", (req, res, next) => {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
   });
-}
+} 
 
 // server startup
 startServer(app);

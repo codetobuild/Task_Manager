@@ -14,13 +14,13 @@ import Team from "./components/Team/Team";
 import About from "./components/About";
 import { checkIsLoggedIn } from "./Services/API/auth";
 
-function App() {
+function App() {    
   const [user, setUser] = useState(null);
 
   // check if user is logged in and store status
   useEffect(() => {
     if (!localStorage.getItem("loggedIn")) {
-      async function fetchIsLoggedIn() {
+      async function fetchIsLoggedIn() {   
         const data = await checkIsLoggedIn();
         console.log(data);
         localStorage.setItem("loggedIn", false);

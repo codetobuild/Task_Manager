@@ -1,7 +1,12 @@
 const mongoose = require("mongoose");
 
 const startDb = () => {
-  mongoose.connect(process.env.DB_URL, {
+  let url = `mongodb://localhost:27017/taskManager`;
+  if (process.env.NODE_ENV == "production") {
+    url = process.env.DB_URL;
+  }
+
+  mongoose.connect(url, {
     useNewUrlParser: true,
   });
 
@@ -10,7 +15,6 @@ const startDb = () => {
   db.once("open", function () {
     console.log("DB connected");
   });
-
 };
 
 module.exports = startDb;

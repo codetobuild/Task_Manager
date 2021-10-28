@@ -64,7 +64,7 @@ const RegisterForm = () => {
         </h5>
         <h5 className="mb-3">
           <label for="password" className="form-label">
-            password
+            Password
           </label>
           <input
             required
@@ -93,7 +93,7 @@ const RegisterForm = () => {
         </h5>
         <h5 className="mb-3">
           <label for="location" className="form-label">
-            location
+            Location
           </label>
           <input
             required

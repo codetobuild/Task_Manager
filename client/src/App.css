@@ -1,8 +1,12 @@
-*{
-     /* border: 1px solid red; */
+* {
+  /* border: 1px solid red; */
 }
 
-a{
-     text-decoration: none !important;
-     cursor: pointer;
+body {
+  font-family: "Poppins", sans-serif !important;
+}
+
+a {
+  text-decoration: none !important;
+  cursor: pointer;
 }

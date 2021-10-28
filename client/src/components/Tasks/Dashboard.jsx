@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { getTasks, deleteTask } from "../../Services/API/task";
 
 const DashBoard = () => {
+  const [allTasks, setAllTasks] = useState([]);
   const [todoTasks, setTodoTasks] = useState([]);
   const [inProgress, setInProgress] = useState([]);
   const [completed, setCompleted] = useState([]);
@@ -12,16 +13,19 @@ const DashBoard = () => {
     if (localStorage.getItem("loggedIn") !== "true") {
       return;
     }
-
     const { data } = await getTasks();
     console.log(data);
-    const todos = data.filter((item) => item.status === "todo");
-    setTodoTasks(todos);
-    const inProgress = data.filter((item) => item.status === "progress");
-    setInProgress(inProgress);
-    const completed = data.filter((item) => item.status === "completed");
-    setCompleted(completed);
+    setAllTasks(data);
   };
+
+  useEffect(() => {
+    const todos = allTasks?.filter((item) => item.status === "todo");
+    setTodoTasks(todos);
+    const inProgress = allTasks?.filter((item) => item.status === "progress");
+    setInProgress(inProgress);
+    const completed = allTasks?.filter((item) => item.status === "completed");
+    setCompleted(completed);
+  }, [allTasks]);
 
   useEffect(() => {
     fetchTasksData();
@@ -32,7 +36,7 @@ const DashBoard = () => {
       <div className="row">
         <div className="col">
           <Board
-            reloadData={fetchTasksData}
+            setAllTasks={setAllTasks}
             data={{
               taskList: todoTasks,
               taskStatus: "todo",
@@ -42,7 +46,7 @@ const DashBoard = () => {
         </div>
         <div className="col">
           <Board
-            fetchTasksData
+            setAllTasks={setAllTasks}
             data={{
               taskList: inProgress,
               taskStatus: "progress",
@@ -52,6 +56,7 @@ const DashBoard = () => {
         </div>
         <div className="col">
           <Board
+            setAllTasks={setAllTasks}
             data={{
               taskList: completed,
               taskStatus: "completed",

@@ -1,17 +1,23 @@
 import { deleteTask } from "../../Services/API/task";
 import { useHistory, useLocation } from "react-router-dom";
+import { getTasks } from "../../Services/API/task";
 
 const Task = (props) => {
   const history = useHistory();
   const location = useLocation();
-  const { task, onDelete } = props;
+  const { task, setAllTasks } = props;
 
   const handleDelete = async (e, taskId) => {
-    const data = await deleteTask(taskId);
-    if (data.success) {
-      return onDelete();
-    }
+    const deleteResponse = await deleteTask(taskId);
+    console.log(deleteResponse);
+    // reload data
+    const { data } = await getTasks();
+    const allTasks = [...data];
+    console.log(allTasks);
+    setAllTasks(allTasks);
   };
+  console.log("adsf", typeof setAllTasks);
+
   const handleEdit = (e) => {
     return history.push({
       pathname: "/dashboard/task/new",

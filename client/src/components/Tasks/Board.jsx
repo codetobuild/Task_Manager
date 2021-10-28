@@ -3,7 +3,7 @@ import { useHistory, Link } from "react-router-dom";
 
 const Board = (props) => {
   const history = useHistory();
-  const { reloadData } = props;
+
   const { taskList, taskStatus, boardTitle } = props.data;
 
   const handleNewTask = () => {
@@ -11,13 +11,6 @@ const Board = (props) => {
       return history.push("/login");
     }
     history.push("/dashboard/task/new");
-  };
-  const handleDelete = async () => {
-    try {
-      return await reloadData();
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   // return jsx
@@ -28,7 +21,7 @@ const Board = (props) => {
         <h4>{renderAddTaskButton(taskStatus, handleNewTask)}</h4>
       </div>
       {taskList.map((item) => (
-        <Task task={item} onDelete={handleDelete} />
+        <Task task={item} setAllTasks={props.setAllTasks} />
       ))}
       <div>
         <h4>

@@ -37,8 +37,10 @@ const TaskDetails = (props) => {
   return (
     <main className="container  p-2 p-md-3 p-lg-5 mt-2 rounded">
       <section className="mb-5">
-        <h2>Title: {task.title}</h2>
-        <p>Description: {task.description}</p>
+        <h4>Title: {task.title}</h4>
+        <h4>
+          <span className="">Description:</span> {task.description}
+        </h4>
       </section>
 
       <section className="mb-4">

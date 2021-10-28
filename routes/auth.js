@@ -21,8 +21,24 @@ Router.get("/logout", logoutUser);
 
 Router.get("/user", async (req, res, next) => {
   try {
-    const user = await User.findOne({ email: req.body.email });
-    res.json(user);
+    // const user = await User.findOne({ email: req.body.email });
+    res.json({ data: req.user });
+  } catch (err) {
+    next(err);
+  }
+});
+
+Router.post("/user/edit", async (req, res, next) => {
+  try {
+    const updateUser = await User.findByIdAndUpdate(req.user.id, req.body, {
+      runValidators: true,
+      new: true,
+    });
+
+    if (!updateUser) {
+      return next(new CustomError("update error", 400));
+    }
+    return res.status(201).json({ success: true, data: updateUser });
   } catch (err) {
     next(err);
   }

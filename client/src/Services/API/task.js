@@ -9,6 +9,15 @@ export const getTasks = async () => {
   }
 };
 
+export const getOneTask = async (taskId) => {
+  try {
+    const { data } = await axios.get(`/api/tasks/${taskId}`);
+    return data.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
 export const newTask = async (formData) => {
   try {
     const { data } = await axios.post("/api/tasks/new", formData, {
@@ -16,7 +25,7 @@ export const newTask = async (formData) => {
         "content-Type": "application/json",
       },
     });
-    return data;
+    return data.data;
   } catch (err) {
     console.log(err.message);
   }
@@ -30,6 +39,19 @@ export const deleteTask = async (taskId) => {
       },
     });
     return data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+export const updateTask = async (formData, taskId) => {
+  try {
+    const { data } = await axios.put(`/api/tasks/${taskId}/update`, formData, {
+      headers: {
+        "content-Type": "application/json",
+      },
+    });
+    return data.data;
   } catch (err) {
     console.log(err.message);
   }

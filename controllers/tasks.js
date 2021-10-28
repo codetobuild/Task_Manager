@@ -16,13 +16,12 @@ exports.getAllTasks = async (req, res, next) => {
 
 exports.getTask = async (req, res, next) => {
   try {
-    const task = await Task.findOne({ id: req.params.id });
+    const task = await Task.findById(req.params.id).populate("createdBy");
     if (!task) {
       return next(new CustomError("task not found", 400));
     }
-    const u = await User.findOne({ id: task.createdBy });
 
-    console.log("crated by", u);
+    console.log("created by", task);
     return res.status(200).json({ success: true, data: task });
   } catch (err) {
     return next(err);

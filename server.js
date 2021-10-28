@@ -50,20 +50,28 @@ app.use((req, res, next) => {
   console.log(req.user);
   next();
 });
+ 
+console.log("hello server");
+
+app.get("/", (req, res, next) => {
+  res.send("<h1>Hello</h1>");
+}); 
 
 // api routes
 app.use("/api", require("./routes/index"));
 
+// catch errors
 app.use(errorHandler);
-// development
+
+// production
 if (process.env.NODE_ENV == "production") {
   app.use(express.static(path.join(__dirname, "/client/build")));
   app.get("*", (req, res, next) => {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
   });
-} 
+}
 
-// server startup
+// express server startup
 startServer(app);
 
 // handle unhandled error close process
@@ -71,3 +79,4 @@ process.on("unhandledRejection", (err, promise) => {
   console.log(`Erro: ${err}`);
   server.close(() => process.exit(1));
 });
+

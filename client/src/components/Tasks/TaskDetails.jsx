@@ -1,46 +1,65 @@
-import { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useHistory, useLocation, useRouteMatch } from "react-router-dom";
+import { getOneTask } from "../../Services/API/task";
 
-const TaskDetails = () => {
+const TaskDetails = (props) => {
   const history = useHistory();
+  const location = useLocation();
+  const routeMatch = useRouteMatch();
+  const [task, setTask] = useState({});
+
   useEffect(() => {
     if (localStorage.getItem("loggedIn") !== "true") {
       history.push("/login");
     }
+
+    const fetchTask = async () => {
+      const data = await getOneTask(routeMatch.params.id);
+      setTask(data);
+    };
+    fetchTask();
   }, []);
+
+  const handleEdit = (e) => {
+    return history.push({
+      pathname: "/dashboard/task/new",
+      state: {
+        prev: location.pathname,
+        detail: {
+          edit: true,
+          data: task,
+        },
+      },
+    });
+    // console.log("edit");
+  };
 
   return (
     <main className="container  p-2 p-md-3 p-lg-5 mt-2 rounded">
       <section className="mb-5">
-        <h2>
-          task tile will appear heretask tile will appear heretask tile will
-          appear here task tile will appear here
-        </h2>
-
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut mollit
-          anim id est laborum.
-        </p>
+        <h2>Title: {task.title}</h2>
+        <p>Description: {task.description}</p>
       </section>
 
       <section className="mb-4">
         <button
           type="button"
-          class="btn btn-primary fs-5 mb-3"
-          style={{ width: "150px" }}>
+          className="btn btn-primary fs-5 mb-3"
+          style={{ width: "150px" }}
+          onClick={handleEdit}>
           Edit
         </button>
       </section>
 
       <section className="mb-5">
         <h6>
-          Status : <span className="badge bg-success">In progress</span>
+          Status <span className="badge bg-success">{task.status}</span>
         </h6>
         <h6>
-          Created on :{" "}
-          <span className="badge bg-success">09 september,2021</span>
+          Created on{" "}
+          <span className="badge bg-success">
+            {new Date(task.createdAt).toDateString()}
+          </span>
         </h6>
         <h6>
           Assigned members :
@@ -70,7 +89,7 @@ const TaskDetails = () => {
           <div className="col-6 col-md-2">
             <button
               type="button"
-              class="btn btn-primary fs-5 mb-3"
+              className="btn btn-primary fs-5 mb-3"
               style={{ width: "200px" }}>
               Add comment
             </button>

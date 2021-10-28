@@ -6,7 +6,7 @@ import Header from "./components/Header/Header";
 import Profile from "./components/User/Profile";
 import RegisterForm from "./components/User/RegisterForm";
 import LoginForm from "./components/User/LoginForm";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 import { Switch, Route, Redirect } from "react-router-dom";
 import HomePage from "./components/HomePage";
@@ -14,13 +14,13 @@ import Team from "./components/Team/Team";
 import About from "./components/About";
 import { checkIsLoggedIn } from "./Services/API/auth";
 
-function App() {    
-  const [user, setUser] = useState(null);
+function App() {
+  // const [user, setUser] = useState(null);
 
   // check if user is logged in and store status
   useEffect(() => {
     if (!localStorage.getItem("loggedIn")) {
-      async function fetchIsLoggedIn() {   
+      async function fetchIsLoggedIn() {
         const data = await checkIsLoggedIn();
         console.log(data);
         localStorage.setItem("loggedIn", false);
@@ -40,7 +40,7 @@ function App() {
         <Route exact path="/Profile" component={Profile} />
         <Route exact path="/teams" component={Team} />
         <Route exact path="/about" component={About} />
-        
+
         <Route exact path="/dashboard" component={DashBoard} />
         <Route exact path="/dashboard/task/new" component={TaskForm} />
         <Route exact path="/dashboard/task/:id" component={TaskDetails} />

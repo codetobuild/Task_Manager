@@ -32,23 +32,31 @@ const DashBoard = () => {
       <div className="row">
         <div className="col">
           <Board
-            data={todoTasks}
-            boardTitle="To do"
-            fetchTasksData={fetchTasksData}
+            reloadData={fetchTasksData}
+            data={{
+              taskList: todoTasks,
+              taskStatus: "todo",
+              boardTitle: "To do",
+            }}
           />
         </div>
         <div className="col">
           <Board
-            data={inProgress}
-            boardTitle="In progress"
-            fetchTasksData={fetchTasksData}
+            fetchTasksData
+            data={{
+              taskList: inProgress,
+              taskStatus: "progress",
+              boardTitle: "In progress",
+            }}
           />
         </div>
         <div className="col">
           <Board
-            data={completed}
-            boardTitle="Completed"
-            fetchTasksData={fetchTasksData}
+            data={{
+              taskList: completed,
+              taskStatus: "completed",
+              boardTitle: "Completed",
+            }}
           />
         </div>
       </div>

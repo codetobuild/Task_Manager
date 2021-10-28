@@ -22,8 +22,8 @@ export const userRegistration = async (formData) => {
     });
     return data;
   } catch (err) {
-    console.log({err});
-  }  
+    console.log({ err });
+  }
 };
 
 export const checkIsLoggedIn = async () => {
@@ -38,6 +38,19 @@ export const checkIsLoggedIn = async () => {
 export const userLogout = async () => {
   try {
     const { data } = await axios.get("/api/auth/logout");
+    return data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+export const userUpdate = async (formData) => {
+  try {
+    const { data } = await axios.post("/api/auth/user/edit", formData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     return data;
   } catch (err) {
     console.log(err.message);

@@ -1,16 +1,30 @@
 import { deleteTask } from "../../Services/API/task";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 const Task = (props) => {
   const history = useHistory();
-  const { task, fetchTasksData } = props;
+  const location = useLocation();
+  const { task, onDelete } = props;
 
   const handleDelete = async (e, taskId) => {
     const data = await deleteTask(taskId);
-    fetchTasksData();
+    if (data.success) {
+      return onDelete();
+    }
   };
-
-
+  const handleEdit = (e) => {
+    return history.push({
+      pathname: "/dashboard/task/new",
+      state: {
+        prev: location.pathname,
+        detail: {
+          edit: true,
+          data: task,
+        },
+      },
+    });
+    // console.log("edit");
+  };
 
   return (
     <div className="card rounded mb-2" title="click to view task">
@@ -20,7 +34,7 @@ const Task = (props) => {
             <h5 className="card-title">{task.title}</h5>
           </div>
           <div className="col-2">
-            <div className="dropdown ">
+            <div className="dropdown" style={{ cursor: "pointer" }}>
               <a
                 className="btn btn-transparent dropdown-toggle icon"
                 href="#"
@@ -28,7 +42,7 @@ const Task = (props) => {
                 id="dropdownMenuLink"
                 data-bs-toggle="dropdown"
                 aria-expanded="false">
-                <i class="fas fa-ellipsis-v"></i>
+                <i className="fas fa-ellipsis-v"></i>
               </a>
 
               <ul
@@ -38,13 +52,13 @@ const Task = (props) => {
                   <a
                     className="dropdown-item"
                     href={`/dashboard/task/${task._id}`}>
-                    <i class="fas fa-tasks me-2"></i> View task
+                    <i className="fas fa-tasks me-2"></i> View task
                   </a>
                 </li>
-                <li>
-                  <a className="dropdown-item" href="/edit">
+                <li onClick={handleEdit}>
+                  <span className="dropdown-item">
                     <i class="fas fa-pen me-2"></i> Edit
-                  </a>
+                  </span>
                 </li>
                 <li>
                   <span

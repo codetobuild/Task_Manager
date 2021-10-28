@@ -31,10 +31,11 @@ const DashBoard = () => {
     fetchTasksData();
   }, []);
 
+  // return jsx
   return (
-    <div className="container mt-3 mt-md-5">
+    <div className="container mt-3 mt-md-5 ">
       <div className="row">
-        <div className="col">
+        <div className="col-12 col-lg-4 mb-5 md-lg-0">
           <Board
             setAllTasks={setAllTasks}
             data={{
@@ -44,7 +45,7 @@ const DashBoard = () => {
             }}
           />
         </div>
-        <div className="col">
+        <div className="col-12 col-lg-4 mb-5 md-lg-0">
           <Board
             setAllTasks={setAllTasks}
             data={{
@@ -54,7 +55,7 @@ const DashBoard = () => {
             }}
           />
         </div>
-        <div className="col">
+        <div className="col-12 col-lg-4 mb-5 md-lg-0">
           <Board
             setAllTasks={setAllTasks}
             data={{

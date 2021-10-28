@@ -40,15 +40,15 @@ const Task = (props) => {
             <h5 className="card-title">{task.title}</h5>
           </div>
           <div className="col-2">
-            <div className="dropdown" style={{ cursor: "pointer" }}>
+            <div className="dropdown bg-danger" style={{ cursor: "pointer" }}>
               <a
-                className="btn btn-transparent dropdown-toggle icon"
+                className="btn btn-transparent dropdown-toggle icon float-end "
                 href="#"
                 role="button"
                 id="dropdownMenuLink"
                 data-bs-toggle="dropdown"
                 aria-expanded="false">
-                <i className="fas fa-ellipsis-v"></i>
+                <i className="fas fa-ellipsis-v "></i>
               </a>
 
               <ul
@@ -63,14 +63,14 @@ const Task = (props) => {
                 </li>
                 <li onClick={handleEdit}>
                   <span className="dropdown-item">
-                    <i class="fas fa-pen me-2"></i> Edit
+                    <i className="fas fa-pen me-2"></i> Edit
                   </span>
                 </li>
                 <li>
                   <span
                     className="dropdown-item"
                     onClick={(e) => handleDelete(e, task._id)}>
-                    <i class="fas fa-trash me-2"></i>Delete
+                    <i className="fas fa-trash me-2"></i>Delete
                   </span>
                 </li>
               </ul>

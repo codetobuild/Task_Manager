@@ -27,12 +27,12 @@ const RegisterForm = () => {
       history.push("/login");
     }
   };
- 
+
   return (
     <div className="container row m-auto mt-2 mt-md-4 ">
       <form
         onSubmit={handleSubmit}
-        className="col col-md-8 col-lg-5 m-auto  p-5 rounded bg-warning shadow-lg">
+        className="col col-md-8 col-lg-5 m-auto pt-3 p-4 p-md-5 rounded bg-info shadow-lg">
         <h1 className="text-center mb-3">Register</h1>
         <h5 className="mb-3">
           <label for="username" className="form-label">

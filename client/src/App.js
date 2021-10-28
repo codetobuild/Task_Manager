@@ -31,7 +31,7 @@ function App() {
   }, []);
 
   return (
-    <div className="">
+    <>
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
@@ -46,7 +46,7 @@ function App() {
         <Route exact path="/dashboard/task/:id" component={TaskDetails} />
         <Redirect to="/" />
       </Switch>
-    </div>
+    </>
   );
 }
 

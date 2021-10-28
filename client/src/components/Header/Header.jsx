@@ -21,7 +21,6 @@ const Header = () => {
     localStorage.removeItem("user");
     history.push("/");
   };
-
   const handleProfile = () => {};
 
   return (
@@ -31,17 +30,21 @@ const Header = () => {
           <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
             <div className="container-fluid">
               <a className="navbar-brand " href="/">
-                <h2>Task-Manager</h2>
+                {window.innerWidth >= 930 ? (
+                  <h3>Task-Manager</h3>
+                ) : (
+                  <h5>Task-Manager</h5>
+                )}
               </a>
               <button
-                className="navbar-toggler"
+                className="navbar-toggler "
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent"
                 aria-expanded="false"
                 aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
+                <i className="fas fa-bars fs-2 text-light"></i>
               </button>
 
               <div

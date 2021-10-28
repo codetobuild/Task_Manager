@@ -72,46 +72,47 @@ const Profile = () => {
   ];
 
   return (
-    <div className="container mt-2 mt-md-3 p-2 p-md-4">
-      <ul className="list-group list-group-flush">
-        {profileProperties?.map((item) => (
-          <li className="list-group-item " key={item.id}>
-            <div className="d-flex justify-content-between align-items-start">
-              <div className="ms-2 me-auto">
-                <div className="fw-bold">{item.label}</div>
-                {user[item.prop]}
-              </div>
-              <button
-                className="btn badge bg-primary"
-                onClick={() => setEdit(item.id)}>
-                <i className="fas fa-pen"></i>
-              </button>
-            </div>
-
-            {edit === item.id ? (
-              <div className="d-flex justify-content-start align-items-start align-items-center">
-                <input
-                  type="text"
-                  className="form-control me-2"
-                  name={item.prop}
-                  value={formInputs[item.prop]}
-                  onChange={handleChange}
-                />
+    <div className="container mt-2 mt-md-4 row m-auto ">
+      <div className=" p-2 p-md-4 bg-info rounded shadow col col-lg-8 m-auto">
+        <ul className="list-group list-group-flush bg-danger">
+          {profileProperties?.map((item) => (
+            <li className="list-group-item bg-info" key={item.id}>
+              <div className="d-flex justify-content-between align-items-start">
+                <div className="ms-2 me-auto">
+                  <div className="fw-bold">{item.label}</div>
+                  {user[item.prop]}
+                </div>
                 <button
-                  className="btn bg-success rounded text-light me-2"
-                  onClick={(e) => handleCancel(e, item.prop)}>
-                  Cancel
-                </button>
-                <button
-                  className="btn bg-success rounded text-light "
-                  onClick={handleSave}>
-                  Save
+                  className="btn badge bg-primary"
+                  onClick={() => setEdit(item.id)}>
+                  <i className="fas fa-pen"></i>
                 </button>
               </div>
-            ) : null}
-          </li>
-        ))}
-      </ul>
+              {edit === item.id ? (
+                <div className="d-flex justify-content-start align-items-start align-items-center">
+                  <input
+                    type="text"
+                    className="form-control me-2"
+                    name={item.prop}
+                    value={formInputs[item.prop]}
+                    onChange={handleChange}
+                  />
+                  <button
+                    className="btn bg-success rounded text-light me-2"
+                    onClick={(e) => handleCancel(e, item.prop)}>
+                    Cancel
+                  </button>
+                  <button
+                    className="btn bg-success rounded text-light "
+                    onClick={handleSave}>
+                    Save
+                  </button>
+                </div>
+              ) : null}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

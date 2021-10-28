@@ -1,5 +1,6 @@
 import Task from "./Task";
 import { useHistory, Link } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 const Board = (props) => {
   const history = useHistory();
@@ -21,13 +22,13 @@ const Board = (props) => {
         <h4>{renderAddTaskButton(taskStatus, handleNewTask)}</h4>
       </div>
       {taskList.map((item) => (
-        <Task task={item} setAllTasks={props.setAllTasks} />
+        <Task task={item} setAllTasks={props.setAllTasks} key={uuidv4()} />
       ))}
       <div>
-        <h4>
+        <div>
           <h4>{renderAddTaskButton(taskStatus, handleNewTask)}</h4>
           <span className="fs-6">Add task</span>
-        </h4>
+        </div>
       </div>
     </div>
   );

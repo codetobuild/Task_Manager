@@ -49,7 +49,7 @@ const LoginForm = () => {
         </h5>
         <h5 className="mb-3">
           <label for="password" className="form-label">
-            password
+            Password
           </label>
           <input
             required

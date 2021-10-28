@@ -50,12 +50,12 @@ app.use((req, res, next) => {
   console.log(req.user);
   next();
 });
- 
+
 console.log("hello server");
 
 app.get("/", (req, res, next) => {
   res.send("<h1>Hello</h1>");
-}); 
+});
 
 // api routes
 app.use("/api", require("./routes/index"));
@@ -79,4 +79,3 @@ process.on("unhandledRejection", (err, promise) => {
   console.log(`Erro: ${err}`);
   server.close(() => process.exit(1));
 });
-
